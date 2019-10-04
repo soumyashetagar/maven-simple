@@ -20,5 +20,12 @@ pipeline {
                 }
             }
         }
+         stage('build & SonarQube Scan') {
+                 MVN="/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven_3.6.2/bin/mvn"
+                 echo "running clean verify sonar"
+                 "$MVN clean verify sonar:sonar -Dsonar.host.url=http://111.11.1.111:9000 -Dsonar.java.binaries=/etc/sonarqube"
+                 echo "running clean install"
+                 "$MVN clean install deploy -DskipTests"
+  }
     }
 }
