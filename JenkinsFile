@@ -1,29 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage ('Initialize') {
-        
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-        }
-      stage('clean')
+
+      stage('all')
             {
                 steps
-                        { 
-                sh 'mvn clean package'
-                sh 'free -m' }
+                 { 
+                    sh 'mvn clean build test'
+                 }
             }
-        stage ('Build') {
-           steps
-           {
-            sh 'mvn build'
-           }
-        }
-        
         stage("build & SonarQube analysis") {
             agent any
             steps {
