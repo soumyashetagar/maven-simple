@@ -14,13 +14,7 @@ public class AppTest
     {
         assertEquals("Hello world", app.greet("world"));
     }
-    
-     @Test
-    public void testApp1()
-    {
-        assertEquals("Hello world", app.greet("nemesis"));
-    }
-
+   
     @Test
     public void testTrue()
     {
