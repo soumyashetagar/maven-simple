@@ -1,37 +1,42 @@
 pipeline {
-    agent any
+    agent {
+        label "master"
+    }
+    tools {
+        // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
+        maven "Maven 3.6.2"
+    }
+    environment {
+        // This can be nexus3 or nexus2
+        NEXUS_VERSION = "nexus3"
+        // This can be http or https
+        NEXUS_PROTOCOL = "http"
+        // Where your Nexus is running
+        NEXUS_URL = "172.17.0.3:8081"
+        // Repository where we will upload the artifact
+        NEXUS_REPOSITORY = "repository-example"
+        // Jenkins credential id to authenticate to Nexus OSS
+        NEXUS_CREDENTIAL_ID = "nexus-credentials"
+    }
     stages {
-        stage ('Initialize') {
+        stage("clone code") {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-        }
-            stage('clean'){
-                   steps{
-                 sh 'mvn clean'
-                         }}
-        stage ('Build') {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
+                script {
+                    // Let's clone the source
+                    git 'https://github.com/soumyashetagar/maven-simple.git';
                 }
             }
         }
-        
-        stage("build & SonarQube analysis") {
-            agent any
+        stage("clean"){
+                   steps{
+                 sh "mvn clean"
+                        }
+                       }
+        stage("mvn build") {
             steps {
-              withSonarQubeEnv('sonarqube') {
-                sh 'mvn clean package sonar:sonar'
-              }
+                script {
+                    // if you using windows then you should use 'bat'
+                    bat(/"${MAVEN_HOME}\bin\mvn" package/)
             }
-          }
-  
+        }
     }
-}
