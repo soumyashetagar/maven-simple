@@ -2,6 +2,7 @@ pipeline {
     agent any
     stages {
         stage ('Initialize') {
+        
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -9,16 +10,18 @@ pipeline {
                 '''
             }
         }
-     
+      stage('clean')
+            {
+                steps
+                        { 
+                sh 'mvn clean package'
+                sh 'free -m' }
+            }
         stage ('Build') {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
+           steps
+           {
+            sh 'mvn build'
+           }
         }
         
         stage("build & SonarQube analysis") {
