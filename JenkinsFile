@@ -1,12 +1,13 @@
 pipeline {
     agent any
+   
     stages {
 
       stage('all')
             {
                 steps
                  { 
-                    sh 'mvn clean build test'
+                    sh 'mvn clean package test'
                  }
             }
         stage("build & SonarQube analysis") {
