@@ -9,7 +9,12 @@ pipeline {
                 '''
             }
         }
-           
+        stage('clean'){
+            steps{
+                sh 'mvn clean'
+                sh 'free -m'
+                }
+          }
         stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
