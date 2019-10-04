@@ -12,6 +12,7 @@ pipeline {
         stage('clean'){
             steps{
                 sh 'mvn clean'
+                sh 'free -m'
                 }
          }
         stage ('Build') {
