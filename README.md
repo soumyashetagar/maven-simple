@@ -26,3 +26,9 @@ and the dependency:
 	</dependency>
 ```
 
+sonar.projectKey=webgoat
+sonar.projectName=webgoat
+sonar.projectVersion=1.0
+sonar.language=java
+sonar.java.binaries=**/target/classes
+sonar.exclusions=**/*.ts
