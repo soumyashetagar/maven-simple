@@ -19,7 +19,7 @@ pipeline {
         }
         stage('nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'phoenix', classifier: '', file: '/var/lib/jenkins/workspace/phoenix_pipeline/target/phoenix-0.0.1-Sphoenix.jar', type: 'jar']], credentialsId: 'e7c637a6-e151-4a41-aabf-46263433a9ee', groupId: 'com.maven', nexusUrl: '18.224..155.110:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'devopstraing', version: '0.0.1-Sphoenix'
+                nexusArtifactUploader artifacts: [[artifactId: 'phoenix', classifier: '', file: '/var/lib/jenkins/workspace/phoenix_pipeline/target/phoenix-0.0.1-Sphoenix.jar', type: 'jar']], credentialsId: 'e7c637a6-e151-4a41-aabf-46263433a9ee', groupId: 'com.maven', nexusUrl: '18.224..155.110:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'devopstraining', version: '0.0.1-Sphoenix'
              }
         
         }
