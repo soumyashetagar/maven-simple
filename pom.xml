@@ -5,7 +5,7 @@
   <groupId>com.maven</groupId>
   <artifactId>phoenix</artifactId>
   <version>0.0.1-Sphoenix</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
  <build>
   <plugins>
 	<plugin>
